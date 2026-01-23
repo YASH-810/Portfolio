@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import StarsBackground from "./Particles";
 import { motion } from "framer-motion";
@@ -24,13 +24,52 @@ const iconItem = {
 };
 
 export default function Hero() {
+  const [text, setText] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
+  
+  const roles = ["Full Stack Developer", "Android Developer", "UI/UX Designer"];
+
+  useEffect(() => {
+    if (isWaiting) return;
+
+    const currentRole = roles[roleIndex];
+    const typeSpeed = isDeleting ? 50 : 100;
+    
+    const timer = setTimeout(() => {
+      // Finished typing
+      if (!isDeleting && text === currentRole) {
+         setIsWaiting(true);
+         setTimeout(() => {
+           setIsWaiting(false);
+           setIsDeleting(true);
+         }, 2000); 
+         return;
+      } 
+      
+      // Finished deleting
+      if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+        return;
+      }
+      
+      const newText = isDeleting 
+        ? currentRole.substring(0, text.length - 1) 
+        : currentRole.substring(0, text.length + 1);
+
+      setText(newText);
+    }, typeSpeed);
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, roleIndex, isWaiting]);
+
   return (
     <section
       id="home"
       className="relative h-[90vh] flex items-center justify-center overflow-hidden text-white"
     >
-      {/* <StarsBackground /> */}
-
       {/* SOCIAL ICONS LEFT */}
       <motion.div
         variants={iconContainer}
@@ -90,28 +129,82 @@ export default function Hero() {
         <motion.div variants={iconItem} className="w-0.5 h-24 bg-gray-600" />
       </motion.div>
 
-      {/* CENTER CONTENT */}
-      <div className="text-center z-10">
-        <h1 className="text-5xl font-extrabold mb-4">
-          Crafting <span className="text-blue-400">Digital Experiences</span> that Inspire 🚀
-        </h1>
+      {/* MAIN CONTENT GRID */}
+      <div className="container max-w-6xl mx-auto px-6 z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        {/* LEFT COLUMN: TEXT */}
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { 
+              opacity: 1, 
+              x: 0,
+              transition: {
+                staggerChildren: 0.1,
+                ease: "easeOut",
+                duration: 0.8
+              }
+            }
+          }}
+          className="text-left"
+        >
+          <motion.div 
+            variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+            className="flex items-center gap-3 mb-4"
+          >
+            <span className="text-2xl md:text-3xl animate-pulse">👋</span>
+            <span className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-[#d4b527] to-[#fbf7e8] bg-clip-text text-transparent">
+              Hello, I am
+            </span>
+          </motion.div>
+          <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+            Yash <br className="hidden md:block" />
+            <span className="text-gray-400">Londhe</span>
+          </motion.h1>
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="h-10 mb-6 flex items-center">
+             <span className="text-xl md:text-3xl text-gray-300 font-bold mr-2">{text}</span>
+             <span className={`w-1 h-8 bg-[#d4b527] inline-block ${isWaiting ? "animate-cursor-blink" : ""}`} />
+          </motion.div>
+          <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-gray-400 text-base md:text-lg leading-relaxed max-w-lg mb-8">
+            I build exceptional digital experiences that are fast, accessible, and visually stunning. Passionate about turning complex problems into elegant solutions.
+          </motion.p>
 
-        <p className="text-gray-300 max-w-xl mx-auto mb-8">
-          I’m a web developer focused on building fast, responsive, and elegant websites using React & Next.js.
-        </p>
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="flex gap-4">
+            <a href="#projects">
+              <Button className="bg-[#d4b527] hover:bg-[#b09620] text-black font-bold px-8 py-6 text-lg rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(212,181,39,0.3)]">
+                View Projects
+              </Button>
+            </a>
+            <a href="#contact">
+              <Button variant="outline" className="border-[#d4b527] text-[#d4b527] hover:bg-[#d4b527]/10 px-8 py-6 text-lg rounded-full transition-all hover:scale-105">
+                Contact Me
+              </Button>
+            </a>
+          </motion.div>
+        </motion.div>
 
-        <div className="flex justify-center gap-4">
-          <a href="#projects">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg">
-              View Projects
-            </Button>
-          </a>
-          <a href="#contact">
-            <Button variant="outline" className="border-blue-400 text-blue-700 hover:bg-blue-50/10 hover:text-white px-6 py-3 text-lg">
-              Contact Me
-            </Button>
-          </a>
-        </div>
+        {/* RIGHT COLUMN: AVATAR */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="flex justify-center lg:justify-end relative"
+        >
+          {/* Decorative Glow */}
+          <div className="absolute inset-0 bg-[#d4b527] blur-[100px] opacity-20 rounded-full scale-75" />
+          
+          <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full border-4 border-[#d4b527]/30 bg-black/50 backdrop-blur-sm flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(212,181,39,0.1)]">
+            {/* Placeholder for Avatar Image */}
+            <div className="text-center p-6">
+              <div className="w-full h-full flex items-center justify-center text-gray-500 italic">
+                {/* Replace this div with: <img src="/your-avatar.jpg" alt="Yash Londhe" className="w-full h-full object-cover" /> */}
+                <span className="text-6xl opacity-20">Avatar</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
       {/* EMAIL RIGHT */}

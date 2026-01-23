@@ -9,11 +9,11 @@ import StarsBackground from "@/components/Particles";
 export default function Home() {
   return (
    <>
-   <StarsBackground />
+   {/* <StarsBackground /> */}
    <Navbar />
    <Hero />
    <About />
-   <Service />
+   {/* <Service /> */}
    <Project />
    <Contact />
    </>
