@@ -64,7 +64,7 @@ export default function About() {
         </motion.div>
 
         {/* ── Bio + Stats ──────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-10 sm:gap-14 lg:gap-16 mb-16 sm:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-10 sm:gap-14 lg:gap-16 items-start mb-16 sm:mb-24">
           <motion.div
             variants={fadeUp(0.05)}
             initial="hidden"
@@ -89,10 +89,10 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col divide-y divide-white/[0.06]"
+            className="flex flex-col divide-y divide-white/[0.06] border-t border-white/[0.06]"
           >
             {stats.map((s, i) => (
-              <div key={i} className="py-6 flex items-baseline justify-between gap-4">
+              <div key={i} className="py-5 flex items-baseline justify-between gap-4">
                 <span className="text-zinc-500 text-sm">{s.label}</span>
                 <span className="text-4xl font-semibold text-white tabular-nums tracking-tight">{s.value}</span>
               </div>
