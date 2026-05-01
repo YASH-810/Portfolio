@@ -60,8 +60,8 @@ export default function Projects() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section id="projects" className="py-32 border-t border-white/[0.06]">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="projects" className="py-16 sm:py-24 lg:py-32 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
 
         {/* Header */}
         <motion.div
@@ -89,7 +89,7 @@ export default function Projects() {
               whileInView="visible"
               viewport={{ once: true }}
               onClick={() => setSelected(p)}
-              className="group grid grid-cols-[48px_1fr_auto] md:grid-cols-[48px_1fr_160px_80px] items-start gap-4 md:gap-8 py-7 hover:bg-white/[0.02] -mx-4 px-4 rounded-md cursor-pointer transition-colors duration-200"
+              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[48px_1fr_160px_64px] items-start gap-3 md:gap-8 py-5 sm:py-7 hover:bg-white/[0.02] -mx-3 sm:-mx-4 px-3 sm:px-4 rounded-md cursor-pointer transition-colors duration-200"
             >
               {/* Number */}
               <span className="text-zinc-700 text-xs font-mono pt-1">{p.index}</span>
@@ -147,7 +147,7 @@ export default function Projects() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.35, ease }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-[#0f0f12] border-l border-white/[0.07] flex flex-col overflow-y-auto"
+              className="fixed right-0 top-0 bottom-0 z-50 w-full sm:max-w-md bg-[#0f0f12] border-l border-white/[0.07] flex flex-col overflow-y-auto"
             >
               {/* Header */}
               <div className="flex items-start justify-between p-7 border-b border-white/[0.06]">

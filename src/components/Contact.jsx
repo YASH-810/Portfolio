@@ -24,8 +24,8 @@ export default function Contact() {
     "w-full bg-transparent border-b border-white/[0.1] focus:border-[#c9a227]/60 py-3 text-sm text-zinc-300 placeholder-zinc-700 outline-none transition-colors duration-200";
 
   return (
-    <section id="contact" className="py-32 border-t border-white/[0.06]">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="contact" className="py-16 sm:py-24 lg:py-32 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
 
         {/* Header */}
         <motion.div

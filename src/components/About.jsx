@@ -44,8 +44,8 @@ const timeline = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 border-t border-white/[0.06]">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="about" className="py-16 sm:py-24 lg:py-32 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
 
         {/* ── Header ───────────────────────────────── */}
         <motion.div
@@ -64,7 +64,7 @@ export default function About() {
         </motion.div>
 
         {/* ── Bio + Stats ──────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-16 mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-10 sm:gap-14 lg:gap-16 mb-16 sm:mb-24">
           <motion.div
             variants={fadeUp(0.05)}
             initial="hidden"
@@ -123,7 +123,7 @@ export default function About() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-[#09090b] hover:bg-[#0f0f12] transition-colors duration-200 p-6"
+                className="bg-[#09090b] hover:bg-[#0f0f12] transition-colors duration-200 p-5 sm:p-6"
               >
                 <p className="text-zinc-500 text-xs font-medium uppercase tracking-[0.14em] mb-5">
                   {col.category}

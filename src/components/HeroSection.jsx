@@ -40,21 +40,16 @@ const stack = [
 function TiltCard() {
   const ref = useRef(null);
 
-  // Raw motion values for tilt
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
 
-  // Spring-damped tilt for smooth feel
   const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [7, -7]), {
-    stiffness: 160,
-    damping: 22,
+    stiffness: 160, damping: 22,
   });
   const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-7, 7]), {
-    stiffness: 160,
-    damping: 22,
+    stiffness: 160, damping: 22,
   });
 
-  // Subtle glare position
   const glareX = useTransform(rawX, [-0.5, 0.5], ["15%", "85%"]);
   const glareY = useTransform(rawY, [-0.5, 0.5], ["15%", "85%"]);
 
@@ -62,7 +57,6 @@ function TiltCard() {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    // Normalize to [-0.5, 0.5]
     rawX.set((e.clientX - rect.left) / rect.width - 0.5);
     rawY.set((e.clientY - rect.top) / rect.height - 0.5);
   };
@@ -74,50 +68,24 @@ function TiltCard() {
 
   return (
     <div className="hidden lg:flex items-center justify-center">
-      {/* Float wrapper */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
-        animate={{
-          opacity: 1,
-          y: [0, -10, 0],
-        }}
+        animate={{ opacity: 1, y: [0, -10, 0] }}
         transition={{
           opacity: { duration: 0.7, delay: 0.4, ease },
-          y: {
-            delay: 1.2,
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          },
+          y: { delay: 1.2, duration: 4.5, repeat: Infinity, ease: "easeInOut" },
         }}
         style={{ perspective: 900 }}
       >
-        {/* Tilt wrapper */}
         <motion.div
           ref={ref}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          style={{
-            rotateX,
-            rotateY,
-            transformStyle: "preserve-3d",
-          }}
+          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
           className="relative"
         >
-          {/* Subtle drop-shadow that shifts with tilt */}
-          <motion.div
-            style={{
-              rotateX,
-              rotateY,
-            }}
-            className="absolute inset-0 rounded-lg"
-            aria-hidden
-          />
-
-          {/* Card */}
-          <div className="border border-white/[0.08] rounded-lg overflow-hidden bg-[#0f0f12] relative w-[340px]">
-
-            {/* Glare overlay */}
+          <div className="border border-white/[0.08] rounded-lg overflow-hidden bg-[#0f0f12] relative w-[320px] xl:w-[340px]">
+            {/* Glare */}
             <motion.div
               style={{
                 background: useTransform(
@@ -129,7 +97,7 @@ function TiltCard() {
               className="absolute inset-0 pointer-events-none z-10 rounded-lg"
             />
 
-            {/* Panel header */}
+            {/* Titlebar */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-[#111114]">
               <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
               <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
@@ -142,37 +110,25 @@ function TiltCard() {
             {/* Info rows */}
             <div className="divide-y divide-white/[0.05]">
               {infoRows.map((row) => (
-                <div
-                  key={row.key}
-                  className="flex items-center justify-between px-5 py-4"
-                >
+                <div key={row.key} className="flex items-center justify-between px-5 py-3.5">
                   <span className="font-mono text-[11px] text-zinc-600 uppercase tracking-[0.1em]">
                     {row.key}
                   </span>
-                  <span
-                    className={`text-sm font-medium ${
-                      row.accent ? "text-[#c9a227]" : "text-zinc-300"
-                    }`}
-                  >
+                  <span className={`text-sm font-medium ${row.accent ? "text-[#c9a227]" : "text-zinc-300"}`}>
                     {row.val}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Stack block */}
+            {/* Stack */}
             <div className="border-t border-white/[0.06] px-5 py-4">
-              <p className="font-mono text-[10px] text-zinc-700 uppercase tracking-[0.1em] mb-3">
-                Stack
-              </p>
+              <p className="font-mono text-[10px] text-zinc-700 uppercase tracking-[0.1em] mb-3">Stack</p>
               <div className="flex flex-col gap-2">
                 {stack.map((row, ri) => (
                   <div key={ri} className="flex items-center gap-2">
                     {row.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs text-zinc-500 border border-white/[0.06] px-2.5 py-1 rounded"
-                      >
+                      <span key={tech} className="text-xs text-zinc-500 border border-white/[0.06] px-2.5 py-1 rounded">
                         {tech}
                       </span>
                     ))}
@@ -200,54 +156,47 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative flex flex-col min-h-screen overflow-hidden"
     >
-      {/* Single restrained glow */}
+      {/* Ambient glow */}
       <div
         className="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] opacity-[0.06]"
         style={{ background: "radial-gradient(circle at top right, #c9a227, transparent 70%)" }}
       />
 
-      <div className="max-w-5xl mx-auto px-6 w-full pt-28 pb-20">
+      {/* ── Main content — grows to fill space ── */}
+      <div className="flex-1 flex flex-col justify-center max-w-5xl mx-auto w-full px-5 sm:px-8 pt-20 sm:pt-24 pb-6">
+
         {/* Two-column grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center min-h-[calc(100vh-140px)]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
-          {/* ── LEFT: text ───────────────────────────── */}
+          {/* LEFT: text */}
           <motion.div variants={stagger} initial="hidden" animate="visible">
-
-            <motion.div variants={fadeUp} className="flex items-center gap-2 mb-10">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-50" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-              </span>
-              <span className="text-xs text-zinc-500 tracking-wide">
-                Available for new projects
-              </span>
-            </motion.div>
 
             <motion.h1
               variants={fadeUp}
-              className="text-5xl sm:text-6xl md:text-[4.25rem] font-semibold text-white tracking-[-0.025em] leading-[1.05] mb-5"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.25rem] font-semibold text-white tracking-[-0.025em] leading-[1.05] mb-4 sm:mb-5"
             >
               Yash Londhe
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="text-lg text-zinc-400 font-normal mb-5 tracking-tight"
+              className="text-base sm:text-lg text-zinc-400 font-normal mb-4 sm:mb-5 tracking-tight"
             >
               Full Stack Developer &amp; Android Engineer
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="text-zinc-500 text-sm leading-[1.8] max-w-[420px] mb-10"
+              className="text-zinc-500 text-sm leading-[1.8] max-w-[420px] mb-8 sm:mb-10"
             >
               I build fast, accessible, and well-crafted digital products.
               Focused on clean architecture, thoughtful UX, and code that scales.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-5">
+            {/* CTAs */}
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 sm:gap-5 mb-8 sm:mb-10">
               <a
                 href="#projects"
                 className="inline-flex items-center gap-2 text-sm font-medium text-white border border-white/10 hover:border-white/25 px-5 py-2.5 rounded-md transition-colors duration-200 hover:bg-white/[0.04]"
@@ -264,47 +213,43 @@ export default function Hero() {
                 </svg>
               </a>
             </motion.div>
+
+            {/* Social links — always visible inside content flow */}
+            <motion.div
+              variants={fadeUp}
+              className="flex items-center gap-5"
+            >
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors duration-200"
+                >
+                  {s.label}
+                </a>
+              ))}
+              <span className="text-zinc-800 text-xs hidden sm:inline">·</span>
+              <a
+                href="#about"
+                className="hidden sm:flex items-center gap-1 text-xs text-zinc-700 hover:text-zinc-400 transition-colors duration-200"
+              >
+                Scroll
+                <motion.span
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="block"
+                >
+                  ↓
+                </motion.span>
+              </a>
+            </motion.div>
           </motion.div>
 
-          {/* ── RIGHT: tilt + float config card ─────── */}
+          {/* RIGHT: tilt card — desktop only */}
           <TiltCard />
         </div>
-
-        {/* Bottom bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.7 }}
-          className="absolute bottom-8 left-6 right-6 max-w-5xl mx-auto flex items-center justify-between"
-        >
-          <div className="flex items-center gap-6">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors duration-200"
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-
-          <a
-            href="#about"
-            className="flex items-center gap-1.5 text-xs text-zinc-700 hover:text-zinc-400 transition-colors duration-200"
-          >
-            Scroll
-            <motion.span
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              className="block"
-            >
-              ↓
-            </motion.span>
-          </a>
-        </motion.div>
       </div>
     </section>
   );
