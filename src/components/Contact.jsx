@@ -35,9 +35,10 @@ export default function Contact() {
           transition={{ duration: 0.6, ease }}
           className="mb-20"
         >
-          <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium mb-4">
-            Contact
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="font-mono text-[11px] text-zinc-700">03</span>
+            <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium">Contact</p>
+          </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em] mb-5">
             Get in Touch
           </h2>

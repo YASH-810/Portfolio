@@ -3,6 +3,9 @@ import Hero from "@/components/HeroSection";
 import About from "@/components/About";
 import Project from "@/components/Project";
 import Contact from "@/components/Contact";
+import Blog from "@/components/Blog";
+import Certifications from "@/components/Certifications";
+import PageTransition from "@/components/PageTransition";
 
 function Footer() {
   const socials = [
@@ -36,18 +39,21 @@ function Footer() {
   );
 }
 
-
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Project />
-        <Contact />
-      </main>
-      <Footer />
+      <PageTransition>
+        <main>
+          <Hero />
+          <About />
+          <Project />
+          <Blog />
+          <Certifications />
+          <Contact />
+        </main>
+        <Footer />
+      </PageTransition>
     </>
   );
 }

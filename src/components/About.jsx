@@ -55,11 +55,12 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium mb-4">
-            About
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="font-mono text-[11px] text-zinc-700">01</span>
+            <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium">About</p>
+          </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em] leading-tight">
-            Background & Skills
+            Background &amp; Skills
           </h2>
         </motion.div>
 
@@ -176,6 +177,39 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+        </motion.div>
+
+        {/* ── Section rule ────────────────── */}
+        <div className="border-t border-white/[0.06] mb-16 sm:mb-20" />
+
+        {/* ── GitHub Contribution Graph ─────── */}
+        <motion.div
+          variants={fadeUp(0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center justify-between mb-8">
+            <p className="text-xs text-zinc-600 uppercase tracking-[0.14em] font-medium">GitHub Activity</p>
+            <a
+              href="https://github.com/yash-810"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors duration-200 flex items-center gap-1"
+            >
+              @yash-810
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" /></svg>
+            </a>
+          </div>
+          <div className="border border-white/[0.06] rounded-lg overflow-hidden bg-[#0d0d10] p-4 sm:p-6">
+            <img
+              src="https://ghchart.rshah.org/c9a227/yash-810"
+              alt="Yash Londhe's GitHub contribution graph"
+              className="w-full h-auto opacity-80"
+              style={{ filter: 'brightness(0.9) contrast(1.1)' }}
+            />
+          </div>
+          <p className="text-zinc-700 text-xs mt-3 text-right font-mono">Last 12 months</p>
         </motion.div>
 
       </div>

@@ -57,7 +57,8 @@ function ArrowIcon() {
 }
 
 export default function Projects() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected]     = useState(null);
+  const [hoveredIndex, setHovered]  = useState(null);
 
   return (
     <section id="projects" className="py-16 sm:py-24 lg:py-32 border-t border-white/[0.06]">
@@ -71,9 +72,10 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium mb-4">
-            Work
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="font-mono text-[11px] text-zinc-700">02</span>
+            <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium">Work</p>
+          </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em]">
             Selected Projects
           </h2>
@@ -88,8 +90,10 @@ export default function Projects() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
               onClick={() => setSelected(p)}
-              className="group grid grid-cols-[40px_1fr_auto] md:grid-cols-[48px_1fr_160px_64px] items-start gap-3 md:gap-8 py-5 sm:py-7 hover:bg-white/[0.02] -mx-3 sm:-mx-4 px-3 sm:px-4 rounded-md cursor-pointer transition-colors duration-200"
+              className="group relative grid grid-cols-[40px_1fr_auto] md:grid-cols-[48px_1fr_160px_64px] items-start gap-3 md:gap-8 py-5 sm:py-7 hover:bg-white/[0.02] -mx-3 sm:-mx-4 px-3 sm:px-4 rounded-md cursor-pointer transition-colors duration-200"
             >
               {/* Number */}
               <span className="text-zinc-700 text-xs font-mono pt-1">{p.index}</span>
@@ -122,6 +126,48 @@ export default function Projects() {
               <div className="flex items-start justify-end pt-1 text-zinc-700 group-hover:text-[#c9a227] transition-colors duration-200">
                 <ArrowIcon />
               </div>
+
+              {/* Hover preview — desktop only */}
+              <AnimatePresence>
+                {hoveredIndex === i && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.97 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="hidden lg:block absolute right-0 bottom-[calc(100%+10px)] z-30 w-52 pointer-events-none"
+                  >
+                    <div className="border border-white/[0.08] rounded-md overflow-hidden bg-[#0f0f12] shadow-2xl">
+                      {/* Titlebar */}
+                      <div className="flex items-center gap-1.5 px-3 py-2 bg-[#111114] border-b border-white/[0.05]">
+                        <span className="w-2 h-2 rounded-full bg-white/[0.08]" />
+                        <span className="w-2 h-2 rounded-full bg-white/[0.08]" />
+                        <span className="w-2 h-2 rounded-full bg-white/[0.08]" />
+                        <span className="ml-auto font-mono text-[9px] text-zinc-700 truncate">
+                          {p.name.toLowerCase().replace(/\s+/g, "-")}
+                        </span>
+                      </div>
+                      {/* Mock content */}
+                      <div className="p-3 space-y-2">
+                        <div className="h-1.5 rounded-full bg-[#c9a227]/30 w-2/3" />
+                        <div className="h-1 rounded-full bg-white/[0.04] w-full" />
+                        <div className="h-1 rounded-full bg-white/[0.04] w-5/6" />
+                        <div className="h-1 rounded-full bg-white/[0.04] w-4/5" />
+                        <div className="grid grid-cols-3 gap-1 pt-1">
+                          {[...Array(6)].map((_, k) => (
+                            <div key={k} className="h-7 rounded bg-white/[0.03] border border-white/[0.04]" />
+                          ))}
+                        </div>
+                        <div className="flex gap-1.5 pt-1">
+                          {p.stack.slice(0, 3).map((t) => (
+                            <span key={t} className="text-[9px] text-zinc-600 border border-white/[0.06] px-1.5 py-0.5 rounded">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>

@@ -6,6 +6,7 @@ const navLinks = [
   { label: "Home",     href: "#home" },
   { label: "About",    href: "#about" },
   { label: "Projects", href: "#projects" },
+  { label: "Blog",     href: "#blog" },
   { label: "Contact",  href: "#contact" },
 ];
 
@@ -17,10 +18,10 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      const sections = ["contact", "projects", "about", "home"];
-      for (const id of sections) {
+      const ids = ["contact", "blog", "projects", "about", "home"];
+      for (const id of ids) {
         const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 160) {
+        if (el && el.getBoundingClientRect().top <= 160) {
           setActive(id);
           break;
         }
@@ -53,11 +54,20 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`text-sm transition-colors duration-200 ${
-                    isActive ? "text-white" : "text-zinc-500 hover:text-zinc-300"
-                  }`}
+                  className="relative pb-1 group"
                 >
-                  {link.label}
+                  <span className={`text-sm transition-colors duration-200 ${
+                    isActive ? "text-white" : "text-zinc-500 hover:text-zinc-300"
+                  }`}>
+                    {link.label}
+                  </span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-underline"
+                      className="absolute bottom-0 left-0 right-0 h-px bg-[#c9a227]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </a>
               );
             })}
