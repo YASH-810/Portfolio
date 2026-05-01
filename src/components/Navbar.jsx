@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
+  { label: "Home",     href: "#home" },
   { label: "About",    href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contact",  href: "#contact" },
@@ -36,21 +37,13 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ${
           scrolled
-            ? "border-b border-white/[0.06] bg-[#09090b]/90 backdrop-blur-xl"
-            : "bg-transparent"
+            ? "border-white/[0.06] bg-[#09090b]/90 backdrop-blur-xl"
+            : "border-transparent bg-transparent"
         }`}
       >
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#home"
-            className="text-sm font-semibold text-white tracking-tight hover:text-[#c9a227] transition-colors duration-200"
-          >
-            Yash Londhe
-          </a>
-
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
