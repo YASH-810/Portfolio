@@ -1,163 +1,228 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Code, Terminal, Coffee, Box, FileJson, FileCode, Cpu, Globe, Smartphone, Database, Layers, Zap } from "lucide-react";
 
 const stats = [
-  { label: "Years Experience", value: "2+", icon: "🚀" },
-  { label: "Projects Completed", value: "15+", icon: "✅" },
-  { label: "Technologies", value: "10+", icon: "⚙️" },
+  { value: "2+",  label: "Years of Experience" },
+  { value: "15+", label: "Projects Delivered" },
+  { value: "10+", label: "Technologies" },
 ];
 
-const skills = [
-  { name: "JavaScript / TypeScript", level: 95, icon: FileJson, color: "from-yellow-400 to-yellow-600" },
-  { name: "React & Next.js", level: 92, icon: Layers, color: "from-cyan-400 to-blue-500" },
-  { name: "Node.js & Express", level: 85, icon: Terminal, color: "from-green-400 to-emerald-600" },
-  { name: "Python", level: 88, icon: Box, color: "from-blue-400 to-indigo-500" },
-  { name: "Android (Java/Kotlin)", level: 80, icon: Smartphone, color: "from-green-500 to-teal-600" },
-  { name: "Databases (SQL/NoSQL)", level: 82, icon: Database, color: "from-orange-400 to-red-500" },
+const skillCategories = [
+  {
+    title: "Frontend",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+  },
+  {
+    title: "Backend",
+    skills: ["Node.js", "Express", "REST APIs", "Firebase", "Python"],
+  },
+  {
+    title: "Mobile",
+    skills: ["Android (Java)", "Kotlin", "React Native"],
+  },
+  {
+    title: "Data & Tools",
+    skills: ["MongoDB", "SQL", "Git", "Docker", "Figma"],
+  },
 ];
 
-const techBadges = [
-  { name: "C", icon: Terminal },
-  { name: "C++", icon: Cpu },
-  { name: "Java", icon: Coffee },
-  { name: "Python", icon: Box },
-  { name: "JavaScript", icon: FileJson },
-  { name: "TypeScript", icon: FileCode },
-  { name: "Next.js", icon: Layers },
-  { name: "React", icon: Code },
-  { name: "Node.js", icon: Terminal },
-  { name: "MongoDB", icon: Database },
-  { name: "Firebase", icon: Zap },
-  { name: "REST APIs", icon: Globe },
+const timeline = [
+  {
+    period: "2024 — Present",
+    title: "Full Stack Developer",
+    org: "Freelance & Personal Projects",
+    description:
+      "Designing and building end-to-end web applications. Focus on performance, accessibility, and scalable architecture.",
+  },
+  {
+    period: "2023 — 2024",
+    title: "Android Developer",
+    org: "Academic & Open Source",
+    description:
+      "Developed native Android applications in Java and Kotlin. Integrated REST APIs, local storage, and custom UI components.",
+  },
+  {
+    period: "2022 — 2023",
+    title: "Frontend Developer",
+    org: "College Projects",
+    description:
+      "Built responsive UIs with React and learned the fundamentals of component-driven design and state management.",
+  },
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 22 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
 
 export default function About() {
   return (
     <section id="about" className="py-28 relative overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-[#d4b527] opacity-[0.04] blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-500 opacity-[0.04] blur-[120px] rounded-full pointer-events-none" />
+      {/* Subtle ambient light */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#d4b527] opacity-[0.03] blur-[140px] rounded-full -translate-y-1/3 translate-x-1/3 pointer-events-none" />
 
       <div className="container max-w-6xl mx-auto px-6 relative z-10">
-        {/* Section Header */}
+
+        {/* ── Section label ─────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <p className="text-[#d4b527] text-sm font-bold tracking-widest uppercase mb-2">Who I Am</p>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4">About Me</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-[#d4b527] to-[#f0d060] rounded-full" />
+          <p className="text-[#d4b527] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+            About
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+            Background & Skills
+          </h2>
         </motion.div>
 
-        {/* Top: Bio + Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 mb-20">
+        {/* ── Top grid: bio (left) + stats (right) ──── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 mb-24">
+
           {/* Bio */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            custom={1}
           >
-            <h3 className="text-2xl font-bold text-white mb-5">
-              I am a{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4b527] to-[#f0d060]">
-                Full Stack Developer
-              </span>{" "}
-              based in India.
-            </h3>
-            <p className="text-gray-400 text-base leading-relaxed mb-4">
-              I specialize in building high-quality websites and applications that are both functional and visually appealing. My passion lies in solving complex problems through clean and efficient code.
+            <p className="text-gray-300 text-lg leading-[1.85] mb-5">
+              I'm a Full Stack Developer based in India, focused on building
+              clean, performant digital products. I enjoy working across the
+              entire stack — from database schema design to polished front-end
+              interfaces.
             </p>
-            <p className="text-gray-400 text-base leading-relaxed mb-8">
-              With a strong foundation in modern technologies like React, Next.js, and Node.js, I strive to create seamless user experiences. I am constantly learning and evolving to keep up with the latest trends in the tech world.
+            <p className="text-gray-500 text-base leading-[1.85]">
+              My background spans web, mobile, and systems programming. I care
+              deeply about code quality, developer experience, and shipping
+              things that actually work. When I'm not coding, I'm exploring new
+              tools or contributing to open-source.
             </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="group bg-white/5 border border-white/10 hover:border-[#d4b527]/40 rounded-2xl p-4 text-center transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="text-2xl mb-1">{stat.icon}</div>
-                  <h4 className="text-3xl font-black text-[#d4b527]">{stat.value}</h4>
-                  <p className="text-gray-500 text-xs mt-1">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
-          {/* Skill Bars */}
+          {/* Stats — minimal, typographic */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm"
+            custom={2}
+            className="flex flex-col justify-center gap-0 divide-y divide-white/[0.06]"
           >
-            <h3 className="text-lg font-bold text-white mb-8 flex items-center gap-3">
-              <span className="w-1 h-5 bg-[#d4b527] rounded-full inline-block" />
-              Technical Proficiency
-            </h3>
-            <div className="space-y-6">
-              {skills.map((skill, i) => (
-                <div key={i}>
-                  <div className="flex justify-between items-center mb-2">
-                    <div className="flex items-center gap-2">
-                      <skill.icon size={15} className="text-gray-400" />
-                      <span className="text-gray-200 text-sm font-medium">{skill.name}</span>
-                    </div>
-                    <span className="text-[#d4b527] text-xs font-bold">{skill.level}%</span>
-                  </div>
-                  <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.3 + i * 0.08, ease: "easeOut" }}
-                      className={`h-full rounded-full bg-gradient-to-r ${skill.color}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            {stats.map((s, i) => (
+              <div key={i} className="py-7 flex items-baseline justify-between">
+                <span className="text-gray-500 text-sm">{s.label}</span>
+                <span className="text-5xl font-bold text-white tabular-nums">{s.value}</span>
+              </div>
+            ))}
           </motion.div>
         </div>
 
-        {/* Tech Badge Cloud */}
+        {/* ── Divider ───────────────────────────────── */}
+        <div className="border-t border-white/[0.06] mb-24" />
+
+        {/* ── Skills grid ───────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          custom={1}
+          className="mb-24"
         >
-          <p className="text-gray-500 text-xs font-bold tracking-widest uppercase mb-6 text-center">Tech I Work With</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {techBadges.map((tech, i) => (
+          <p className="text-[#d4b527] text-xs font-semibold tracking-[0.2em] uppercase mb-10">
+            Technical Skills
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.06]">
+            {skillCategories.map((cat, ci) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.7 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                key={ci}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                whileHover={{ scale: 1.08, y: -3 }}
-                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:border-[#d4b527]/40 hover:bg-[#d4b527]/5 rounded-xl text-gray-300 hover:text-white transition-all cursor-default text-sm"
+                custom={ci * 0.5 + 1}
+                className="bg-[#0d2135] p-8 hover:bg-[#112840] transition-colors duration-300"
               >
-                <tech.icon size={14} className="text-[#d4b527]" />
-                {tech.name}
+                <p className="text-[#d4b527] text-xs font-semibold tracking-[0.15em] uppercase mb-6">
+                  {cat.title}
+                </p>
+                <ul className="space-y-3">
+                  {cat.skills.map((skill, si) => (
+                    <li
+                      key={si}
+                      className="flex items-center gap-3 text-gray-300 text-sm"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-[#d4b527] shrink-0" />
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
         </motion.div>
+
+        {/* ── Divider ───────────────────────────────── */}
+        <div className="border-t border-white/[0.06] mb-24" />
+
+        {/* ── Timeline ──────────────────────────────── */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={1}
+        >
+          <p className="text-[#d4b527] text-xs font-semibold tracking-[0.2em] uppercase mb-10">
+            Experience
+          </p>
+
+          <div className="space-y-0 divide-y divide-white/[0.06]">
+            {timeline.map((item, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i * 0.6 + 1}
+                className="group grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-12 py-10 hover:bg-white/[0.02] transition-colors duration-300 -mx-6 px-6 rounded-xl"
+              >
+                {/* Period */}
+                <div className="pt-1">
+                  <span className="text-gray-500 text-sm font-mono tabular-nums">
+                    {item.period}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div>
+                  <div className="flex items-start justify-between mb-1 gap-4">
+                    <h3 className="text-white text-lg font-semibold group-hover:text-[#d4b527] transition-colors duration-200">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-500 text-sm mb-4">{item.org}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed max-w-2xl">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
