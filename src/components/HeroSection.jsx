@@ -214,11 +214,8 @@ export default function Hero() {
               </a>
             </motion.div>
 
-            {/* Social links — always visible inside content flow */}
-            <motion.div
-              variants={fadeUp}
-              className="flex items-center gap-5"
-            >
+            {/* Social links */}
+            <motion.div variants={fadeUp} className="flex items-center gap-5">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -230,27 +227,33 @@ export default function Hero() {
                   {s.label}
                 </a>
               ))}
-              <span className="text-zinc-800 text-xs hidden sm:inline">·</span>
-              <a
-                href="#about"
-                className="hidden sm:flex items-center gap-1 text-xs text-zinc-700 hover:text-zinc-400 transition-colors duration-200"
-              >
-                Scroll
-                <motion.span
-                  animate={{ y: [0, 3, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                  className="block"
-                >
-                  ↓
-                </motion.span>
-              </a>
             </motion.div>
+
+
           </motion.div>
 
           {/* RIGHT: tilt card — desktop only */}
           <TiltCard />
         </div>
       </div>
+
+      {/* Scroll — centered bottom */}
+      <motion.a
+        href="#about"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.7 }}
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-700 hover:text-zinc-400 transition-colors duration-200 group"
+      >
+        <span className="text-[10px] tracking-[0.18em] uppercase">Scroll</span>
+        <motion.span
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="block text-sm"
+        >
+          ↓
+        </motion.span>
+      </motion.a>
     </section>
   );
 }
