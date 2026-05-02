@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import ShaderBackground from "./Shader";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -158,14 +159,19 @@ export default function Hero() {
       id="home"
       className="relative flex flex-col min-h-screen overflow-hidden"
     >
+      {/* Shader Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <ShaderBackground />
+      </div>
+
       {/* Ambient glow */}
       <div
-        className="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] opacity-[0.06]"
+        className="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] opacity-[0.06] z-0"
         style={{ background: "radial-gradient(circle at top right, #c9a227, transparent 70%)" }}
       />
 
       {/* ── Main content — grows to fill space ── */}
-      <div className="flex-1 flex flex-col justify-center max-w-5xl mx-auto w-full px-5 sm:px-8 pt-20 sm:pt-24 pb-6">
+      <div className="relative z-10 flex-1 flex flex-col justify-center max-w-5xl mx-auto w-full px-5 sm:px-8 pt-20 sm:pt-24 pb-6">
 
         {/* Two-column grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
@@ -243,7 +249,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.7 }}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-700 hover:text-zinc-400 transition-colors duration-200 group"
+        className="absolute z-10 bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-700 hover:text-zinc-400 transition-colors duration-200 group"
       >
         <span className="text-[10px] tracking-[0.18em] uppercase">Scroll</span>
         <motion.span
