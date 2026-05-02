@@ -68,7 +68,7 @@ function TiltCard() {
   };
 
   return (
-    <div className="hidden lg:flex items-center justify-center">
+    <div className="hidden lg:flex items-center justify-center pointer-events-auto">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: [0, -10, 0] }}
@@ -160,7 +160,7 @@ export default function Hero() {
       className="relative flex flex-col min-h-screen overflow-hidden"
     >
       {/* Shader Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0">
         <ShaderBackground />
       </div>
 
@@ -171,13 +171,13 @@ export default function Hero() {
       />
 
       {/* ── Main content — grows to fill space ── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center max-w-5xl mx-auto w-full px-5 sm:px-8 pt-20 sm:pt-24 pb-6">
+      <div className="relative z-10 flex-1 flex flex-col justify-center max-w-5xl mx-auto w-full px-5 sm:px-8 pt-20 sm:pt-24 pb-6 pointer-events-none">
 
         {/* Two-column grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
           {/* LEFT: text */}
-          <motion.div variants={stagger} initial="hidden" animate="visible">
+          <motion.div variants={stagger} initial="hidden" animate="visible" className="pointer-events-auto">
 
             <motion.h1
               variants={fadeUp}
