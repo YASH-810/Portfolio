@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -14,10 +15,30 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1400));
-    setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setStatus(null), 5000);
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (response.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+        toast.success("Message sent successfully!");
+        setTimeout(() => setStatus(null), 5000);
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.error || "Failed to send message");
+        setStatus(null);
+      }
+    } catch (error) {
+      toast.error("An error occurred while sending the message.");
+      setStatus(null);
+    }
   };
 
   const inputClass =

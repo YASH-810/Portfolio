@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,6 +27,28 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
+        <Toaster 
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: '#18181b',
+              color: '#fff',
+              border: '1px solid rgba(255,255,255,0.1)',
+            },
+            success: {
+              iconTheme: {
+                primary: '#34d399',
+                secondary: '#18181b',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#ef4444',
+                secondary: '#18181b',
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );
