@@ -48,7 +48,7 @@ export default function Home() {
           <Hero />
           <About />
           <Project />
-          <Blog />
+          {/* <Blog /> */}
           <Certifications />
           <Contact />
         </main>

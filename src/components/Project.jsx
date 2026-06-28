@@ -20,7 +20,7 @@ const projects = [
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     status: "Live",
     repo: "https://github.com/yash-810/portfolio",
-    demo: "#",
+    demo: "https://yashlondhe.vercel.app/",
   },
   {
     index: "02",
@@ -32,7 +32,7 @@ const projects = [
     stack: ["Next.js", "Firebase", "MongoDB", "TypeScript", "Tailwind CSS"],
     status: "Live",
     repo: "#",
-    demo: "#",
+    demo: "https://nss-pu.vercel.app/",
   },
   {
     index: "03",
@@ -147,23 +147,33 @@ export default function Projects() {
                           {p.name.toLowerCase().replace(/\s+/g, "-")}
                         </span>
                       </div>
-                      {/* Mock content */}
-                      <div className="p-3 space-y-2">
-                        <div className="h-1.5 rounded-full bg-[#c9a227]/30 w-2/3" />
-                        <div className="h-1 rounded-full bg-white/[0.04] w-full" />
-                        <div className="h-1 rounded-full bg-white/[0.04] w-5/6" />
-                        <div className="h-1 rounded-full bg-white/[0.04] w-4/5" />
-                        <div className="grid grid-cols-3 gap-1 pt-1">
-                          {[...Array(6)].map((_, k) => (
-                            <div key={k} className="h-7 rounded bg-white/[0.03] border border-white/[0.04]" />
-                          ))}
+                      {p.demo && p.demo !== "#" ? (
+                        <div className="relative w-full h-36 overflow-hidden bg-[#0a0a0c]">
+                          <iframe
+                            src={p.demo}
+                            title={`${p.name} Live Preview`}
+                            className="absolute top-0 left-0 w-[800px] h-[550px] origin-top-left scale-[0.26] border-0 pointer-events-none select-none"
+                          />
                         </div>
-                        <div className="flex gap-1.5 pt-1">
-                          {p.stack.slice(0, 3).map((t) => (
-                            <span key={t} className="text-[9px] text-zinc-600 border border-white/[0.06] px-1.5 py-0.5 rounded">{t}</span>
-                          ))}
+                      ) : (
+                        /* Mock content */
+                        <div className="p-3 space-y-2">
+                          <div className="h-1.5 rounded-full bg-[#c9a227]/30 w-2/3" />
+                          <div className="h-1 rounded-full bg-white/[0.04] w-full" />
+                          <div className="h-1 rounded-full bg-white/[0.04] w-5/6" />
+                          <div className="h-1 rounded-full bg-white/[0.04] w-4/5" />
+                          <div className="grid grid-cols-3 gap-1 pt-1">
+                            {[...Array(6)].map((_, k) => (
+                              <div key={k} className="h-7 rounded bg-white/[0.03] border border-white/[0.04]" />
+                            ))}
+                          </div>
+                          <div className="flex gap-1.5 pt-1">
+                            {p.stack.slice(0, 3).map((t) => (
+                              <span key={t} className="text-[9px] text-zinc-600 border border-white/[0.06] px-1.5 py-0.5 rounded">{t}</span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </motion.div>
                 )}
@@ -246,24 +256,30 @@ export default function Projects() {
               </div>
 
               {/* Footer links */}
-              <div className="p-7 border-t border-white/[0.06] flex gap-4">
-                <a
-                  href={selected.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-center text-sm text-white border border-white/10 hover:border-white/25 py-2.5 rounded-md transition-colors hover:bg-white/[0.04]"
-                >
-                  Live Demo
-                </a>
-                <a
-                  href={selected.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-center text-sm text-zinc-400 hover:text-white border border-white/[0.06] hover:border-white/15 py-2.5 rounded-md transition-colors"
-                >
-                  Source Code
-                </a>
-              </div>
+              {(selected.demo && selected.demo !== "#") || (selected.repo && selected.repo !== "#") ? (
+                <div className="p-7 border-t border-white/[0.06] flex gap-4">
+                  {selected.demo && selected.demo !== "#" && (
+                    <a
+                      href={selected.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center text-sm text-white border border-white/10 hover:border-white/25 py-2.5 rounded-md transition-colors hover:bg-white/[0.04]"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  {selected.repo && selected.repo !== "#" && (
+                    <a
+                      href={selected.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center text-sm text-zinc-400 hover:text-white border border-white/[0.06] hover:border-white/15 py-2.5 rounded-md transition-colors"
+                    >
+                      Source Code
+                    </a>
+                  )}
+                </div>
+              ) : null}
             </motion.aside>
           </>
         )}
