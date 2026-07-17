@@ -73,7 +73,6 @@ export default function Projects() {
           className="mb-20"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[11px] text-zinc-700">02</span>
             <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium">Work</p>
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em]">

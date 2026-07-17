@@ -8,12 +8,6 @@ const fadeUp = (delay = 0) => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease } },
 });
 
-const stats = [
-  { value: "2+",  label: "Years experience" },
-  { value: "15+", label: "Projects shipped" },
-  { value: "10+", label: "Technologies" },
-];
-
 const skills = [
   { category: "Frontend",   items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"] },
   { category: "Backend",    items: ["Node.js", "Express", "REST APIs", "Firebase", "Python"] },
@@ -23,22 +17,16 @@ const skills = [
 
 const timeline = [
   {
-    period: "2024 – Present",
-    role: "Full Stack Developer",
-    org: "Freelance",
-    desc: "End-to-end development of web applications. Focus on performance, accessibility, and scalable front-to-back architecture.",
+    period: "Dec 2025 – Present",
+    role: "Website & CMS Development Intern",
+    org: "Pillai College of Engineering",
+    desc: "Working on the Pillai University website and content management system (CMS) as part of ongoing internship — contributing to both front-end development and CMS architecture/features.",
   },
   {
-    period: "2023 – 2024",
-    role: "Android Developer",
-    org: "Academic & Open Source",
-    desc: "Native Android apps in Java and Kotlin. REST API integration, local storage, and custom UI systems.",
-  },
-  {
-    period: "2022 – 2023",
-    role: "Frontend Developer",
-    org: "College Projects",
-    desc: "Built responsive interfaces with React. Learned component architecture, state management, and CSS layout systems.",
+    period: "Dec 2024 – Dec 2025",
+    role: "Web Development Intern",
+    org: "Pillai College of Engineering",
+    desc: "Developed the CTFC website for the college during internship.",
   },
 ];
 
@@ -53,10 +41,9 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-10"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[11px] text-zinc-700">01</span>
             <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium">About</p>
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em] leading-tight">
@@ -64,24 +51,23 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* ── Bio + Stats ──────────────────────────── */}
+        {/* ── Bio + Redesigned Sidebar ──────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-10 sm:gap-14 lg:gap-16 items-start mb-16 sm:mb-24">
           <motion.div
             variants={fadeUp(0.05)}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
+            className="space-y-6"
           >
-            <p className="text-zinc-300 text-base leading-[1.9] mb-5">
-              I'm a Full Stack Developer based in India. I care about writing
-              clean code that's maintainable, and building interfaces that feel
-              intuitive and fast. I enjoy the full stack — database design,
-              APIs, and polished front-end work.
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              I&apos;m a Full Stack Developer and IT student based in Mumbai, India, focused on building web platforms, AI-integrated systems, and native applications.
             </p>
-            <p className="text-zinc-500 text-base leading-[1.9]">
-              My background spans web, mobile, and systems programming. When I'm
-              not building, I'm reading about software architecture or contributing
-              to open source.
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              My work spans building end-to-end products — from designing APIs and data models to crafting responsive front-end interfaces — with a strong interest in AI-powered tools and systems that run efficiently on their own.
+            </p>
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              Outside of core development, I explore game development, local AI systems, and self-hosted infrastructure as personal projects.
             </p>
           </motion.div>
 
@@ -90,14 +76,52 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col divide-y divide-white/[0.06] border-t border-white/[0.06]"
           >
-            {stats.map((s, i) => (
-              <div key={i} className="py-5 flex items-baseline justify-between gap-4">
-                <span className="text-zinc-500 text-sm">{s.label}</span>
-                <span className="text-4xl font-semibold text-white tabular-nums tracking-tight">{s.value}</span>
+            {/* Terminal Card */}
+            <div className="border border-white/[0.08] bg-[#0a0a0c] rounded-lg overflow-hidden font-mono text-[11px] sm:text-xs">
+              {/* Title bar */}
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-[#111114] border-b border-white/[0.06]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+                <span className="ml-2 text-zinc-600 text-[10px]">yash@portfolio ~ %</span>
               </div>
-            ))}
+              {/* Terminal body */}
+              <div className="p-4 space-y-3 leading-relaxed">
+                <div>
+                  <span className="text-[#c9a227]">$ </span>
+                  <span className="text-zinc-300">whoami</span>
+                </div>
+                <p className="text-zinc-500 pl-3">Full Stack Developer &amp; IT Student</p>
+
+                <div>
+                  <span className="text-[#c9a227]">$ </span>
+                  <span className="text-zinc-300">cat location.txt</span>
+                </div>
+                <p className="text-zinc-500 pl-3">Mumbai, India (GMT+5:30)</p>
+
+                <div>
+                  <span className="text-[#c9a227]">$ </span>
+                  <span className="text-zinc-300">cat focus.txt</span>
+                </div>
+                <p className="text-zinc-500 pl-3">Web Platforms, AI Systems, Native Apps</p>
+
+                <div>
+                  <span className="text-[#c9a227]">$ </span>
+                  <span className="text-zinc-300">cat status.txt</span>
+                </div>
+                <p className="text-emerald-400 pl-3 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Available for opportunities
+                </p>
+
+                <div className="flex items-center">
+                  <span className="text-[#c9a227]">$ </span>
+                  <span className="text-zinc-300 ml-1">_</span>
+                  <span className="w-1.5 h-4 bg-[#c9a227] ml-0.5 animate-pulse"></span>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
 

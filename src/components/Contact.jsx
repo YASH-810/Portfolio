@@ -57,16 +57,15 @@ export default function Contact() {
           className="mb-20"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[11px] text-zinc-700">03</span>
             <p className="text-xs text-[#c9a227] tracking-[0.18em] uppercase font-medium">Contact</p>
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-[-0.02em] mb-5">
             Get in Touch
           </h2>
-          <p className="text-zinc-500 text-base max-w-md leading-relaxed">
+          {/* <p className="text-zinc-500 text-base max-w-md leading-relaxed">
             Open to full-time roles, freelance projects, and interesting
             conversations. Reach out below or email me directly.
-          </p>
+          </p> */}
         </motion.div>
 
         {/* Two-column */}
@@ -181,7 +180,7 @@ export default function Contact() {
                   </button>
                   <a
                     href="mailto:londheyash07@gmail.com"
-                    className="text-sm text-zinc-600 hover:text-zinc-400 transition-colors duration-200"
+                    className="text-sm text-zinc-600 hover:text-[#c9a227] transition-colors duration-200"
                   >
                     or email directly ↗
                   </a>

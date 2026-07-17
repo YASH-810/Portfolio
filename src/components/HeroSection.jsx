@@ -139,12 +139,12 @@ function TiltCard() {
             </div>
 
             {/* Footer */}
-            <div className="border-t border-white/[0.06] px-5 py-3 flex items-center gap-2">
+            {/* <div className="border-t border-white/[0.06] px-5 py-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span className="font-mono text-[10px] text-zinc-700">
                 2+ years · 15+ projects shipped
               </span>
-            </div>
+            </div> */}
           </div>
         </motion.div>
       </motion.div>
@@ -181,21 +181,21 @@ export default function Hero() {
 
             <motion.h1
               variants={fadeUp}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.25rem] font-semibold text-white tracking-[-0.025em] leading-[1.05] mb-4 sm:mb-5"
+              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.25rem] font-semibold text-white tracking-[-0.025em] leading-[1.05] mb-4 sm:mb-5"
             >
               Yash Londhe
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="text-base sm:text-lg text-zinc-400 font-normal mb-4 sm:mb-5 tracking-tight"
+              className="font-serif text-base sm:text-lg text-zinc-400  mb-4 sm:mb-5 tracking-tight"
             >
-              Full Stack Developer &amp; Android Engineer
+              Full Stack Developer
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="text-zinc-500 text-sm leading-[1.8] max-w-[420px] mb-8 sm:mb-10"
+              className="text-zinc-400 text-sm leading-[1.8] max-w-[420px] mb-8 sm:mb-10"
             >
               I build fast, accessible, and well-crafted digital products.
               Focused on clean architecture, thoughtful UX, and code that scales.
@@ -203,12 +203,12 @@ export default function Hero() {
 
             {/* CTAs */}
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 sm:gap-5 mb-8 sm:mb-10">
-              <a
+              {/* <a
                 href="#projects"
                 className="inline-flex items-center gap-2 text-sm font-medium text-white border border-white/10 hover:border-white/25 px-5 py-2.5 rounded-md transition-colors duration-200 hover:bg-white/[0.04]"
               >
                 View Work
-              </a>
+              </a> */}
               <a
                 href="mailto:londheyash07@gmail.com"
                 className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-[#c9a227] transition-colors duration-200"

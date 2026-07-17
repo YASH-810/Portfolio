@@ -28,7 +28,7 @@ function Footer() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors duration-200"
+              className="text-xs text-zinc-600 hover:text-[#c9a227] transition-colors duration-200"
             >
               {s.label}
             </a>

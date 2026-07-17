@@ -1,10 +1,17 @@
-import { Inter } from "next/font/google";
+import { JetBrains_Mono, Fraunces } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const inter = Inter({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-serif",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
 });
@@ -25,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${jetbrainsMono.variable} ${fraunces.variable} font-sans antialiased`}>
         {children}
         <Toaster 
           position="bottom-right"
